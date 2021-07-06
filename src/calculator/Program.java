@@ -31,7 +31,10 @@ public class Program {
 		Exit :
 		while(sc.hasNext()) {
 			String val = sc.next();
-			if(!key.containsKey(val)) break Exit;
+			if(!key.containsKey(val)) {
+				System.out.println("잘못된 값을 입력하여 프로그램이 종료됩니다.");
+				break Exit;
+			}
 			key.get(val).click();
 		}
 	}
