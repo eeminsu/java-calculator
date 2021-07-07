@@ -5,7 +5,7 @@
  * -que : ArrayList<String> 입력값을 받을 큐
  * 
  * +add(String) : void - 큐에 입력값 input, 큐 출력
- * +result() : void - Operation cal에 값을 위임하여 결과 값을 받음, 큐 비움, add()
+ * +result() : void - postFix Stack을 계산하여 결과값을 반환하는 클래스의 cal 메소드에 값을 위임하여 결과 값을 받음, 큐 비움, add()
  * +clear() : void - 큐 비움, 큐 출력
  * -render() : void - 큐 출력
  */
@@ -29,9 +29,9 @@ public class Panel {
 	}
 	
 	public void result() {
-		String result = operation.cal(que);
+		//String result = operation.cal(que);
 		que.clear();
-		add(result);
+		//add(result);
 	}
 	
 	public void clear() {

@@ -17,7 +17,7 @@ public class Program {
 	}
 	
 	public Program() {
-		String oper = "0123456789+/*-";
+		String oper = "0123456789+/*-()";
 		String[] strArray = oper.split("");
 		Stream<String> strStream = Arrays.stream(strArray);
 		strStream.forEach(a -> key.put(a, new InputKey(panel, a)));

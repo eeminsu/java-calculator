@@ -1,10 +1,6 @@
 /*
- * 연산 클래스
- * -postFixList : ArrayList<String> - postFix 변환이 완료된 리스트
- * -postFixStack : Stack<String> - postFix 변환을 위한 연산자 스택
- * -outStack : Stack<String> - postFix 계산을 위한 스택
- * 
- * +cal(que) : int - inFix 리스트를 입력받아 계산을 수행하는 메소드
+ * que 변환 클래스
+ * +transferQue(que) : ArrayList<String> - 입력받은 que를 피연산자와 연사자로 구분시켜 다시 que에 저장
  *
  *
  * 21.07.05
@@ -19,53 +15,32 @@
  * 1)que를 피연산자와 연사자로 구분시켜 다시 que에 저장하는 클래스
  * 2)que를 postFix Stack으로 변환하는 클래스
  * 3)postFix Stack을 계산하여 결과값을 반환하는 클래스
+ * 
+ * 21.07.07
+ * Operation클래스는 que를 피연산자와 연산자로 구분시켜 다시 que에 저장하는 역할만 하게끔 변경
+ * stringRePlace(), ListtoString()제거 - 단순 API를 리턴하는 메소드는 불필요하다고 봄
+ * cal() 메소드 변경 - 클래스 기능의 변경에 따른 메소드 변경
+ * replaceList() 제거 - 변경된 cal() 메소드와 기능이 겹쳐 제거
  */
 
 package calculator;
 
 import java.util.ArrayList;
-import java.util.Stack;
 import java.util.StringTokenizer;
 
 public class Operation {
-	private ArrayList<String> postFixList = new ArrayList<>();
-	private Stack<String> postFixStack = new Stack<>();
-	private Stack<String> outStack = new Stack<>();
+	
+	public Operation(){}
 
-	public String cal(ArrayList<String> que) {
-		replaceList(stringRePlace(listtoString(que)));
-		
-		return null;
-	}
-	
-	// ArrayList to String 수행
-	private String listtoString(ArrayList<String> que) {
-		return String.join("", que);
-	}
-	
-	/*
-	 * replaceAll 메소드를 이용하여 String 치환
-	 * replcaeAll은 정규식을 사용할 수 있음, $1,$2... 그룹을 뜻함
-	 * 
-	 * 정규식을 ()로 묶어 그룹으로 만듬
-	 * que에 쌓인 연산자와 피연산자를 나누어줄 수 있음 -> 2자리수 이상의 피연산자를 계산하기 위함
-	 */
-	private String stringRePlace(String str) {
-		return str.replaceAll("([+\\/*\\-])", " $1 ");
-	}
-	
-	/*
-	 * 피연산자와 연산자가 분리된 String을 받아서 다시 ArrayList에 add함
-	 */
-	private ArrayList<String> replaceList(String str){
+	public ArrayList<String> transferQue(ArrayList<String> que) {
 		ArrayList<String> replaceQue = new ArrayList<>();
-		StringTokenizer st = new StringTokenizer(str, " ");
+		StringTokenizer st = new StringTokenizer(String.join("", que).replaceAll("([)\\(+\\/*\\-])", " $1 "), " ");
 		
-		while(!st.hasMoreTokens()) {
+		while(st.hasMoreTokens()) {
 			replaceQue.add(st.nextToken());
 		}
 		
 		return replaceQue;
 	}
-
+	
 }
