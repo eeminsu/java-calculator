@@ -4,10 +4,14 @@
  * -postFixStack : Stack<String> - postFix 변환을 위한 연산자 스택
  * -outStack : Stack<String> - postFix 계산을 위한 스택
  * 
- * +transPostFix() : Stack<String> - que를 postFix Stack으로 변환하는 메소드
+ * -ToPriority() : int - 입력된 연산자를 우선순위로 변환하여 반환하는 메소드
+ * +TransPostFix() : Stack<String> - que를 postFix Stack으로 변환하는 메소드
  * 
- * 21.07.07
- * que를 postFixList에 추가하는 메소드를 만들어야함..
+ * 21.07.10
+ * TransPostFix() 메소드 구현중 stack peek 비교 관련해서 문제가 발생.. 원인파악해야함..
+ * ToPriority() 메소드 추가 - stack peek 문제 해결 못해서 임시방편으로 추가..
+ * 연산 클래스 추가 구현해야함..
+ * 
  * 
  */
 
@@ -21,14 +25,57 @@ public class TransferPostFix {
 	ArrayList<String> postFixList = new ArrayList<>();
 	Stack<String> postFixStack = new Stack<>();
 	
+	
 	public TransferPostFix(){}
 	
-	public Stack<String> transPostFix(ArrayList<String> que){
-		for(String str : que) {
-			if(str != "+" && str != "-" && str != "/" && str != "*") {
-				postFixList.add(str);
+	private int ToPriority(String operator) {
+		switch(operator) {
+		case ")":
+			return 0;
+		case "*":
+		case "/":
+			return 1;
+		case "+":
+		case "-":
+			return 2;
+		case "(":
+			return 3;
+		default :
+			return -1;
+		}
+	}
+	
+	public ArrayList<String> TransPostFix(ArrayList<String> que){
+		for(String token : que) {
+			switch(token) {
+			case "(":
+			case "*":
+			case "/":
+				postFixStack.push(token);
+				break;
+			case ")":
+				while(!postFixStack.isEmpty() && ToPriority(postFixStack.peek()) != 3) {
+					postFixList.add(postFixStack.pop());
+				}
+				if(!postFixStack.isEmpty() && ToPriority(postFixStack.peek()) == 3)
+					postFixStack.pop();
+				break;
+			case "+":
+			case "-":
+				while(!postFixStack.isEmpty() && (ToPriority(postFixStack.peek()) < ToPriority(token))) {
+					postFixList.add(postFixStack.pop());
+				}
+				postFixStack.push(token);
+				break;
+			default :
+				postFixList.add(token);
+				break;
 			}
 		}
-		return null;
+		while(!postFixStack.isEmpty()) {
+			postFixList.add(postFixStack.pop());
+		}
+		System.out.println(postFixList);
+		return postFixList;
 	}
 }

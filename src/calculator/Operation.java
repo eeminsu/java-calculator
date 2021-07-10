@@ -39,7 +39,7 @@ public class Operation {
 		while(st.hasMoreTokens()) {
 			replaceQue.add(st.nextToken());
 		}
-		
+		System.out.println(replaceQue);
 		return replaceQue;
 	}
 	
