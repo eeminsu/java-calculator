@@ -10,8 +10,6 @@
  * 21.07.10
  * TransPostFix() 메소드 구현중 stack peek 비교 관련해서 문제가 발생.. 원인파악해야함..
  * ToPriority() 메소드 추가 - stack peek 문제 해결 못해서 임시방편으로 추가..
- * 연산 클래스 추가 구현해야함..
- * 
  * 
  */
 
@@ -20,13 +18,12 @@ package calculator;
 import java.util.ArrayList;
 import java.util.Stack;
 
-public class TransferPostFix {
+public class ConvertPostFix {
 	
 	ArrayList<String> postFixList = new ArrayList<>();
 	Stack<String> postFixStack = new Stack<>();
 	
-	
-	public TransferPostFix(){}
+	public ConvertPostFix(){}
 	
 	private int ToPriority(String operator) {
 		switch(operator) {
@@ -75,7 +72,6 @@ public class TransferPostFix {
 		while(!postFixStack.isEmpty()) {
 			postFixList.add(postFixStack.pop());
 		}
-		System.out.println(postFixList);
 		return postFixList;
 	}
 }

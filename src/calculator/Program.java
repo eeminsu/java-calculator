@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 
 public class Program {
 	
-	private Panel panel = new Panel(new Operation());
+	private Panel panel = new Panel(new TransferQue());
 	private static Map<String, Keypad> key = new HashMap<>();
 	
 	public static void main(String[] args) {

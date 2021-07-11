@@ -28,9 +28,9 @@ package calculator;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
-public class Operation {
+public class TransferQue {
 	
-	public Operation(){}
+	public TransferQue(){}
 
 	public ArrayList<String> transferQue(ArrayList<String> que) {
 		ArrayList<String> replaceQue = new ArrayList<>();
@@ -39,7 +39,6 @@ public class Operation {
 		while(st.hasMoreTokens()) {
 			replaceQue.add(st.nextToken());
 		}
-		System.out.println(replaceQue);
 		return replaceQue;
 	}
 	
