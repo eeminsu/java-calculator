@@ -17,9 +17,9 @@ import java.util.ArrayList;
 public class Panel {
 	
 	private ArrayList<String> que = new ArrayList<String>();
-	private TransferQue operation;
+	private Operation operation;
 
-	public Panel(TransferQue operation) {
+	public Panel(Operation operation) {
 		this.operation = operation;
 	}
 	
@@ -29,9 +29,9 @@ public class Panel {
 	}
 	
 	public void result() {
-		//String result = operation.cal(que);
+		String result = operation.cal(que);
 		que.clear();
-		//add(result);
+		add(result);
 	}
 	
 	public void clear() {

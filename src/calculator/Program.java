@@ -1,3 +1,10 @@
+/*
+ * 사칙연산 계산기 메인 클래스
+ * 
+ * 오직 정수(Int)만 계산이 가능함
+ * 0~9, *, /, +, -, (, )을 제외한 값을 입력할 경우 프로그램은 종료
+ */
+
 package calculator;
 
 import java.io.InputStream;
@@ -9,7 +16,7 @@ import java.util.stream.Stream;
 
 public class Program {
 	
-	private Panel panel = new Panel(new TransferQue());
+	private Panel panel = new Panel(new Operation(new TransferQue(), new ConvertPostFix()));
 	private static Map<String, Keypad> key = new HashMap<>();
 	
 	public static void main(String[] args) {
