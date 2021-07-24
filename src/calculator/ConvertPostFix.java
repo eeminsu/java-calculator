@@ -14,6 +14,13 @@
  * peek() == 비교연산 안되는 이유 파악
  * ToPriority 메소드 대신 다른 방법 생각해보기 (ex. enum..)
  * 
+ * 21.07.24
+ * String 클래스를 == 연산자로 비교할 시에는 비교 대상의 주소값을 비교한다.
+ * equals는 값자체를 비교하기 때문에 == 연산자를 사용했을 때 false만 나오는 것
+ * 
+ * ToPriority 메소드 삭제
+ * equlas 사용
+ * 
  */
 
 package calculator;
@@ -27,24 +34,7 @@ public class ConvertPostFix {
 	Stack<String> postFixStack = new Stack<>();
 	
 	public ConvertPostFix(){}
-	
-	private int ToPriority(String operator) {
-		switch(operator) {
-		case ")":
-			return 0;
-		case "*":
-		case "/":
-			return 1;
-		case "+":
-		case "-":
-			return 2;
-		case "(":
-			return 3;
-		default :
-			return -1;
-		}
-	}
-	
+
 	public ArrayList<String> TransPostFix(ArrayList<String> que){
 		for(String token : que) {
 			switch(token) {
@@ -54,15 +44,15 @@ public class ConvertPostFix {
 				postFixStack.push(token);
 				break;
 			case ")":
-				while(!postFixStack.isEmpty() && ToPriority(postFixStack.peek()) != 3) {
+				while(!postFixStack.isEmpty() && !postFixStack.peek().equals("(")) {
 					postFixList.add(postFixStack.pop());
 				}
-				if(!postFixStack.isEmpty() && ToPriority(postFixStack.peek()) == 3)
+				if(!postFixStack.isEmpty() && postFixStack.peek().equals("("))
 					postFixStack.pop();
 				break;
 			case "+":
 			case "-":
-				while(!postFixStack.isEmpty() && (ToPriority(postFixStack.peek()) < ToPriority(token))) {
+				while(!postFixStack.isEmpty() && (postFixStack.peek().equals("*") || postFixStack.peek().equals("/"))) {
 					postFixList.add(postFixStack.pop());
 				}
 				postFixStack.push(token);
