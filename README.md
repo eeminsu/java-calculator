@@ -74,3 +74,7 @@ Java 공부를 하고 처음으로 진행한 토이 프로젝트입니다.
 - 자료구조 스택 활용 - 계산기 (2/2) by.Chan-Su Shin  
   https://youtu.be/MYk4autDAJ0
 
+## 6. 개선 사항(21.07.24)  
+- ConverPostFix 클래스에서 ToPriority 메소드 삭제
+- Stack.peek() 메소드 사용시 비교연산을 == 사용할 시 비교대상의 주소값을 비교하기 때문에 항상 false를 반환
+- String 클래스의 equals() 메소드를 사용하면 값만 비교하기 때문에 정상동작
